@@ -31,9 +31,9 @@ petApp.getShelter = function (query) {
 			}
 	});
 };
-// petApp.displayPet = function(pets){
-// 	console.log(pets);
-// };
+petApp.displayPet = function(pets){
+	console.log(pets);
+};
 
 petApp.init = function () {
 	$.when(petApp.getPet('toronto, ON'), petApp.getShelter('toronto, ON')) 
@@ -49,18 +49,21 @@ petApp.init = function () {
 				});
 				shelterObj.pet = filteredPets;//this takes each objects out of our shelters array, creats a property called pet, whichs stores out filtered puppies
 			});
-			var shelterWithPets = shelters.filter(function(shelterObj){
+			petApp.shelterWithPets = shelters.filter(function(shelterObj){
 				return shelterObj.pet.length > 0
 			});
 			//go through the shelters and look at the pets
 			//if the pets array is not empty, return that shelter object into a variable
 			//variable called shelter with pets.
+			// petApp.events(); come back to this to listen for on.change events
+			petApp.displayPet(petApp.shelterWithPets);
 		}) //done
 		.fail(function(err1, err2) {
 			console.log(err1, err2)
 		}); //fail
 
-};
+}; //end of init function
+
 
 $(function() {
 	petApp.init();
