@@ -7,3 +7,25 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(mymap);
 
 
+
+petApp.displayPet = function(pets){
+	var markers = [];
+
+	petApp.shelterWithPets.forEach(function(shelterLocation){
+		console.log(shelterLocation);
+		var latLng = L.latLng(shelterLocation.latitude.$t, shelterLocation.longitude.$t);
+		var marker = L.marker(latLng, {
+			alt: shelterLocation.name.$t, 
+			title: shelterLocation.name.$t
+		}).bindPopup(
+			`<div><p>${shelterLocation.name.$t}</p></div>`
+		);
+
+		markers.push(marker);
+	}); //end of for each loop
+	var markerGroup = L.featureGroup(markers);
+
+	markerGroup.addTo(mymap);
+};
+
+
