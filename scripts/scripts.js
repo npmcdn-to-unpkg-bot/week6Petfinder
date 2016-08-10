@@ -10,8 +10,9 @@ petApp.getPet = function (query) {
 		data: {
 			key: petApp.apiKey,
 			location: query,
-			format: 'json'
-
+			format: 'json',
+			animal: "dog",
+			count: 100
 		}
 	})
 	.then(function(e) {
@@ -25,7 +26,7 @@ petApp.displayPet = function(pets){
 };
 
 petApp.init = function () {
-	petApp.getPet('Toronto, Ontario');
+	petApp.getPet('toronto, ON');
 }
 
 $(function() {
