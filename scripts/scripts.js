@@ -31,9 +31,10 @@ petApp.getShelter = function (query) {
 			}
 	});
 };
-petApp.displayPet = function(pets){
-	console.log(pets);
-};
+// petApp.displayPet = function(pets){
+// 	// console.log(pets);
+// }; Using this in Map.JS
+
 
 petApp.init = function () {
 	$.when(petApp.getPet('toronto, ON'), petApp.getShelter('toronto, ON')) 
@@ -61,6 +62,7 @@ petApp.init = function () {
 		.fail(function(err1, err2) {
 			console.log(err1, err2)
 		}); //fail
+
 
 }; //end of init function
 
