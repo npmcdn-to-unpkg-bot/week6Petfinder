@@ -40,7 +40,6 @@ petApp.init = function () {
 
 		.done(function(gotPet, gotShelter){
 			var pets = gotPet[0].petfinder.pets.pet;
-			console.log(pets, "woof")
 			var shelters = gotShelter[0].petfinder.shelters.shelter;
 			// console.log(shelters)
 
@@ -50,7 +49,12 @@ petApp.init = function () {
 				});
 				shelterObj.pet = filteredPets;//this takes each objects out of our shelters array, creats a property called pet, whichs stores out filtered puppies
 			});
-			console.log(shelters[6])
+			var shelterWithPets = shelters.filter(function(shelterObj){
+				return shelterObj.pet.length > 0
+			});
+			//go through the shelters and look at the pets
+			//if the pets array is not empty, return that shelter object into a variable
+			//variable called shelter with pets.
 		}) //done
 		.fail(function(err1, err2) {
 			console.log(err1, err2)
