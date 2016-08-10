@@ -6,6 +6,79 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<header>
+		<h1>find your local puppy</h1>
+	</header>
+	<main>
+		<section class="form">
+			<form action="">
+				<input type="text" name="location">
+				<select name="distance" id="distance">
+					<option value="10">within 10 miles</option>
+					<option value="25">within 25 miles</option>
+					<option value="50">within 50 miles</option>
+					<option value="100">within 100 miles</option>
+					<option value="any">any</option>
+				</select>
+				<select name="age" id="age">
+					<option value="puppy">puppy</option>
+					<option value="adult">adult</option>
+					<option value="senior">senior</option>
+					<option value="any">any</option>
+				</select>
+				<ul class="characteristics">
+					<li>
+						<input type="checkbox" id="trained">
+						<label for="trained">trained</label>
+					</li>
+					<li>
+						<input type="checkbox" id="declawed">
+						<label for="declawed">declawed</label>
+					</li>
+					<li>
+						<input type="checkbox" id="needs">
+						<label for="needs">needs</label>
+					</li>
+				</ul>
+				<ul class="size">
+					<li>
+						<input type="checkbox" id="s">
+						<label for="s">s</label>
+					</li>
+					<li>
+						<input type="checkbox" id="m">
+						<label for="m">m</label>
+					</li>
+					<li>
+						<input type="checkbox" id="l">
+						<label for="l">l</label>
+					</li>
+					<li>
+						<input type="checkbox" id="xl">
+						<label for="xl">xl</label>
+					</li>
+				</ul>
+				<ul class="houseHold">
+					<li>
+						<input type="checkbox" id="cat">
+						<label for="cat">cat</label>
+					</li>
+					<li>
+						<input type="checkbox" id="dog">
+						<label for="dog">dog</label>
+					</li>
+					<li>
+						<input type="checkbox" id="kids">
+						<label for="kids">kids</label>
+					</li>
+				</ul>
+				<div class="submitButton">
+					<input type="submit">
+				</div>
+			</form>
+		</section>
+	</main>
+
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   	<script src="scripts/scripts.js"></script>
