@@ -37,40 +37,39 @@ petApp.getShelter = function (query) {
 
 
 petApp.init = function () {
-	$('.searchLocation').on('submit', function(e) {
+	// console.log(locationInput);
+	$('.searchForm').on('submit', function(e) {
 	    e.preventDefault(); // default action is refreshing the page, we don't want thats
 	    petApp.locationInput = $('input[name=location]').val();
 	    $('input[name=location]').val('');
-	    // console.log(locationInput);
+	    console.log(petApp.locationInput);
 	    // getting lat lng of user location
-	});
-	// var locationInput = $('input[name=location]').val();
-	// console.log(locationInput);
-	$.when(petApp.getPet(petApp.locationInput), petApp.getShelter(petApp.locationInput)) 
+		$.when(petApp.getPet(petApp.locationInput), petApp.getShelter( petApp.locationInput)) 
 
-		.done(function(gotPet, gotShelter){
-			var pets = gotPet[0].petfinder.pets.pet;
-			var shelters = gotShelter[0].petfinder.shelters.shelter;
-			// console.log(shelters)
+			.done(function(gotPet, gotShelter){
+				var pets = gotPet[0].petfinder.pets.pet;
+				var shelters = gotShelter[0].petfinder.shelters.shelter;
+				// console.log(shelters)
 
-			shelters.forEach(function(shelterObj) {
-				var filteredPets = pets.filter(function(petObj) {
-					return petObj.shelterId.$t === shelterObj.id.$t
+				shelters.forEach(function(shelterObj) {
+					var filteredPets = pets.filter(function(petObj) {
+						return petObj.shelterId.$t === shelterObj.id.$t
+					});
+					shelterObj.pet = filteredPets;//this takes each objects out of our shelters array, creats a property called pet, whichs stores out filtered puppies
 				});
-				shelterObj.pet = filteredPets;//this takes each objects out of our shelters array, creats a property called pet, whichs stores out filtered puppies
-			});
-			petApp.shelterWithPets = shelters.filter(function(shelterObj){
-				return shelterObj.pet.length > 0
-			});
-			//go through the shelters and look at the pets
-			//if the pets array is not empty, return that shelter object into a variable
-			//variable called shelter with pets.
-			// petApp.events(); come back to this to listen for on.change events
-			petApp.displayPet(petApp.shelterWithPets);
-		}) //done
-		.fail(function(err1, err2) {
-			console.log(err1, err2)
-		}); //fail
+				petApp.shelterWithPets = shelters.filter(function(shelterObj){
+					return shelterObj.pet.length > 0
+				});
+				//go through the shelters and look at the pets
+				//if the pets array is not empty, return that shelter object into a variable
+				//variable called shelter with pets.
+				// petApp.events(); come back to this to listen for on.change events
+				petApp.displayPet(petApp.shelterWithPets);
+			}) //done
+			.fail(function(err1, err2) {
+				console.log(err1, err2)
+			}); //fail
+	});
 
 
 }; //end of init function
