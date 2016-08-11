@@ -31,10 +31,6 @@ petApp.getShelter = function (query) {
 			}
 	});
 };
-// petApp.displayPet = function(pets){
-// 	// console.log(pets);
-// }; Using this in Map.JS
-
 
 petApp.init = function () {
 	// console.log(locationInput);
@@ -64,14 +60,16 @@ petApp.init = function () {
 				//if the pets array is not empty, return that shelter object into a variable
 				//variable called shelter with pets.
 				// petApp.events(); come back to this to listen for on.change events
+				// petApp.initMap();
+				if (petApp.mymap === undefined) {
+					petApp.initMap();
+				} 				
 				petApp.displayPet(petApp.shelterWithPets);
 			}) //done
 			.fail(function(err1, err2) {
 				console.log(err1, err2)
 			}); //fail
 	});
-
-
 }; //end of init function
 
 
