@@ -9,9 +9,11 @@ petApp.initMap = function() {
 };
 
 petApp.displayPet = function(pets){
+	console.log(pets);
 	$('.secondForm').fadeIn();
 	var markers = [];
-	petApp.shelterWithPets.forEach(function(shelterLocation){
+	//make this 
+	pets.forEach(function(shelterLocation){
 		// console.log(shelterLocation);
 		var latLng = L.latLng(shelterLocation.latitude.$t, shelterLocation.longitude.$t);
 		var marker = L.marker(latLng, {
@@ -22,12 +24,12 @@ petApp.displayPet = function(pets){
 		);
 		markers.push(marker);
 	}); //end of for each loop
-	var markerGroup = L.featureGroup(markers);
+	petApp.markerGroup = L.featureGroup(markers);
 
-	console.log('markerGroup', markerGroup)//.getBounds())
+	console.log('markerGroup', petApp.markerGroup)//.getBounds())
 
-	petApp.mymap.fitBounds(markerGroup.getBounds());
-	markerGroup.addTo(petApp.mymap);
+	petApp.mymap.fitBounds(petApp.markerGroup.getBounds());
+	petApp.markerGroup.addTo(petApp.mymap);
 };
 
 

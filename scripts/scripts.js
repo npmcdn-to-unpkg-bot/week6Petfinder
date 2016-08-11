@@ -46,7 +46,7 @@ petApp.init = function () {
 				var pets = gotPet[0].petfinder.pets.pet;
 				var shelters = gotShelter[0].petfinder.shelters.shelter;
 				// console.log(shelters)
-
+				//put this into it's own function - RANJAN
 				shelters.forEach(function(shelterObj) {
 					var filteredPets = pets.filter(function(petObj) {
 						return petObj.shelterId.$t === shelterObj.id.$t
@@ -84,7 +84,6 @@ petApp.init = function () {
 		var checkedValues = checkedInputs.map(function(index, input) {
 			return $(input).val();
 		}).toArray();
-		console.log(checkedValues);
 		// go through the checkedvalues array 
 		// gainn access to each value 
 		// console.log(petApp.shelterWithPets);
@@ -93,15 +92,26 @@ petApp.init = function () {
 			// get pets' age 
 			// filter out pets whose age match any checked values 
 
-
-			petApp.shelterWithPets.forEach(function(shelter){
+			//Here we could clear the map
+			petApp.mymap.removeLayer(petApp.markerGroup);
+			var newPets = petApp.shelterWithPets.map(function(shelter){
 				var filteredPets = checkedValues.map(function(criteria){
 					return shelter.pet.filter(function(pet){
 						return pet.age.$t === criteria;
 					});
 				});
 				console.log(filteredPets);
+				var flattenedPets = $.map(filteredPets, function(n){
+					return n;
+				});
+				//Here display marker for each shelter
+				shelter.pet = flattenedPets;
+				return shelter
+			}).filter(function(shelter){
+				return shelter.pet.length > 0;
 			});		
+			console.log(newPets);
+			petApp.displayPet(newPets);
 			// var checkedPups = petApp.shelterWithPets.filter(function(shelter) {
 			// 	var dogs = shelter.pet.forEach(function(pup){
 			// 		var filteredValues = checkedValues.map(function(criteria){
