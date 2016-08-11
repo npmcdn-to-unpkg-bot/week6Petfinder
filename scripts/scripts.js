@@ -43,16 +43,10 @@ petApp.init = function () {
 	    $('input[name=location]').val('');
 	    // console.log(locationInput);
 	    // getting lat lng of user location
-	    geocoder = new L.Control.Geocoder.Nominatim();
-	    geocoder.geocode(petApp.locationInput, function(results) { 
-	        clatLng = new L.LatLng(results[0].center.lat, results[0].center.lng);
-	        console.log(clatLng);   
-
-	    });
 	});
-	var locationInput = $('input[name=location]').val();
-	console.log(locationInput);
-	$.when(petApp.getPet('toronto, ON'), petApp.getShelter('toronto, ON')) 
+	// var locationInput = $('input[name=location]').val();
+	// console.log(locationInput);
+	$.when(petApp.getPet(petApp.locationInput), petApp.getShelter(petApp.locationInput)) 
 
 		.done(function(gotPet, gotShelter){
 			var pets = gotPet[0].petfinder.pets.pet;

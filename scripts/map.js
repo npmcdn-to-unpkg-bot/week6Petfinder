@@ -1,4 +1,4 @@
-var mymap = L.map('mapid').setView([43.6532, -79.3832], 13); // lan&lng now is toronto; will change to query to match user's input;
+var mymap = L.map('mapid')//.setView([43.6532, -79.3832], 13); // lan&lng now is toronto; will change to query to match user's input;
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
@@ -18,12 +18,15 @@ petApp.displayPet = function(pets){
 		}).bindPopup(
 			`<div><p>${shelterLocation.name.$t}</p></div>`
 		);
-
 		markers.push(marker);
 	}); //end of for each loop
 	var markerGroup = L.featureGroup(markers);
 
+	console.log('markerGroup', markerGroup)//.getBounds())
+
+	mymap.fitBounds(markerGroup.getBounds());
 	markerGroup.addTo(mymap);
+
 };
 
 
