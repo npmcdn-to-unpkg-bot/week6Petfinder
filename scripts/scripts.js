@@ -61,10 +61,36 @@ petApp.init = function () {
 				//variable called shelter with pets.
 				// petApp.events(); come back to this to listen for on.change events
 				// petApp.initMap();
+
+				// once the second form i
 				if (petApp.mymap === undefined) {
 					petApp.initMap();
 				} 				
 				petApp.displayPet(petApp.shelterWithPets);
+				console.log(petApp.shelterWithPets)
+
+				$('.secondForm').on('submit', function(e) {
+					e.preventDefault();
+					// console.log($("input[type=checkbox]:checked").val())
+					$("input[type=checkbox]:checked").each(function(input){
+						// petApp.shelterWithPets.pet.forEach(pet, function(pup){
+						// 	return pup.age.$t === 
+						// })
+					    // yourArray.push($(this).val());
+					  	// var checkedPets =  petApp.shelterWithPets.filter(function(puppy) {
+					   //  	return 
+					   //  })
+					    console.log(input);
+					});
+
+					// $("input[type=checkbox]").change(function(){
+					// 	if ((this).val() !== undefined) {
+					// 		(this).val()
+					// 	}
+					// });
+				})
+
+
 			}) //done
 			.fail(function(err1, err2) {
 				console.log(err1, err2)
