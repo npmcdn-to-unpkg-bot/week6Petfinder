@@ -6,13 +6,11 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1Ijoiam95OTAxN21hcGJveCIsImEiOiJjaW94M2RneXQwMDJ1d2ZtNXp4a29pbTV4In0.TebEkoRfRP8E0hw_Nd3PFA'
 }).addTo(mymap);
 
-
-
 petApp.displayPet = function(pets){
 	var markers = [];
 
 	petApp.shelterWithPets.forEach(function(shelterLocation){
-		console.log(shelterLocation);
+		// console.log(shelterLocation);
 		var latLng = L.latLng(shelterLocation.latitude.$t, shelterLocation.longitude.$t);
 		var marker = L.marker(latLng, {
 			alt: shelterLocation.name.$t, 
