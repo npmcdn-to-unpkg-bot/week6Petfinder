@@ -67,34 +67,28 @@ petApp.init = function () {
 					petApp.initMap();
 				} 				
 				petApp.displayPet(petApp.shelterWithPets);
-				console.log(petApp.shelterWithPets)
+				// console.log(petApp.shelterWithPets)
 
-				$('.secondForm').on('submit', function(e) {
-					e.preventDefault();
-					// console.log($("input[type=checkbox]:checked").val())
-					$("input[type=checkbox]:checked").each(function(input){
-						// petApp.shelterWithPets.pet.forEach(pet, function(pup){
-						// 	return pup.age.$t === 
-						// })
-					    // yourArray.push($(this).val());
-					  	// var checkedPets =  petApp.shelterWithPets.filter(function(puppy) {
-					   //  	return 
-					   //  })
-					    console.log(input);
-					});
-
-					// $("input[type=checkbox]").change(function(){
-					// 	if ((this).val() !== undefined) {
-					// 		(this).val()
-					// 	}
-					// });
-				})
 
 
 			}) //done
 			.fail(function(err1, err2) {
 				console.log(err1, err2)
 			}); //fail
+	});
+
+	$('.secondForm').on('submit', function(e) {
+		e.preventDefault();
+		// console.log($("input[type=checkbox]:checked").val())
+		var checkedInputs = $('input[type=checkbox]:checked');
+		console.log(checkedInputs);
+		var checkedValues = checkedInputs.map(function(index, input) {
+			return $(input).val();
+		}).toArray();
+		console.log(checkedValues);
+
+
+		
 	});
 }; //end of init function
 
