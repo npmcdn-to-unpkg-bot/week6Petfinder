@@ -9,6 +9,7 @@ petApp.initMap = function() {
 };
 
 petApp.displayPet = function(pets){
+	$('.secondForm').fadeIn();
 	var markers = [];
 	petApp.shelterWithPets.forEach(function(shelterLocation){
 		// console.log(shelterLocation);
