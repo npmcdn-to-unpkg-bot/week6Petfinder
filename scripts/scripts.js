@@ -37,6 +37,21 @@ petApp.getShelter = function (query) {
 
 
 petApp.init = function () {
+	$('.searchLocation').on('submit', function(e) {
+	    e.preventDefault(); // default action is refreshing the page, we don't want thats
+	    petApp.locationInput = $('input[name=location]').val();
+	    $('input[name=location]').val('');
+	    // console.log(locationInput);
+	    // getting lat lng of user location
+	    geocoder = new L.Control.Geocoder.Nominatim();
+	    geocoder.geocode(petApp.locationInput, function(results) { 
+	        clatLng = new L.LatLng(results[0].center.lat, results[0].center.lng);
+	        console.log(clatLng);   
+
+	    });
+	});
+	var locationInput = $('input[name=location]').val();
+	console.log(locationInput);
 	$.when(petApp.getPet('toronto, ON'), petApp.getShelter('toronto, ON')) 
 
 		.done(function(gotPet, gotShelter){
