@@ -105,10 +105,10 @@ petApp.init = function () {
 					return n;
 				});
 				//Here display marker for each shelter
-				shelter.pet = flattenedPets;
+				shelter.finalPets = flattenedPets;
 				return shelter
 			}).filter(function(shelter){
-				return shelter.pet.length > 0;
+				return shelter.finalPets.length > 0;
 			});		
 			console.log(newPets);
 			petApp.displayPet(newPets);
