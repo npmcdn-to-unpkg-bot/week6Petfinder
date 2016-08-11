@@ -81,14 +81,42 @@ petApp.init = function () {
 		e.preventDefault();
 		// console.log($("input[type=checkbox]:checked").val())
 		var checkedInputs = $('input[type=checkbox]:checked');
-		console.log(checkedInputs);
 		var checkedValues = checkedInputs.map(function(index, input) {
 			return $(input).val();
 		}).toArray();
 		console.log(checkedValues);
+		// go through the checkedvalues array 
+		// gainn access to each value 
+		// console.log(petApp.shelterWithPets);
+		// for (var i = 0; i < checkedValues.length; i ++){
+			// go to our filteredPets thingy 
+			// get pets' age 
+			// filter out pets whose age match any checked values 
 
 
-		
+			petApp.shelterWithPets.forEach(function(shelter){
+				var filteredPets = checkedValues.map(function(criteria){
+					return shelter.pet.filter(function(pet){
+						return pet.age.$t === criteria;
+					});
+				});
+				console.log(filteredPets);
+			});		
+			// var checkedPups = petApp.shelterWithPets.filter(function(shelter) {
+			// 	var dogs = shelter.pet.forEach(function(pup){
+			// 		var filteredValues = checkedValues.map(function(criteria){
+			// 			return 
+			// 		});
+			// });
+
+				// console.log(dogs)
+			// });
+
+		// };
+
+
+
+
 	});
 }; //end of init function
 
