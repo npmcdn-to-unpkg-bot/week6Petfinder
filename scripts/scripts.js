@@ -1,8 +1,10 @@
+// -------------- creating empty object and properties to use in Ajax  call -------------- 
 var petApp = {};
 	petApp.apiKey = '6e0b64b1d094adcd97940c98d9e86423';
 	petApp.apiUrlPup = 'http://api.petfinder.com/pet.find';
 	petApp.apiUrlShelter = 'http://api.petfinder.com/shelter.find'
 
+// --------------- making ajax call for pet data -------------- 
 petApp.getPet = function (query) {
 	return $.ajax({
 			url: petApp.apiUrlPup,
@@ -14,10 +16,10 @@ petApp.getPet = function (query) {
 				format: 'json',
 				animal: "dog",
 				count: 100
-			}
-	});
-};
-
+			} // /data
+	});// /$.ajax
+};// /.getPet
+// ---------------- making ajax call for shelter data -------------- 
 petApp.getShelter = function (query) {
 	return $.ajax({
 			url: petApp.apiUrlShelter,
@@ -28,135 +30,93 @@ petApp.getShelter = function (query) {
 				location: query,
 				format: 'json',
 				count: 100
-			}
-	});
-};
-
+			} // /data
+	});// /$.ajax
+};// /.getShelter
+// ------------------ initiating App -------------- 
 petApp.init = function () {
-	// console.log(locationInput);
+// ------------------ when form is submitted-------------- 
 	$('.searchForm').on('submit', function(e) {
-	    e.preventDefault(); // default action is refreshing the page, we don't want thats
+// ------------------ prevent default form page refreshing action-------------- 
+	    e.preventDefault(); 
+// ------------------ grab the user's locaiton input value-------------- 
 	    petApp.locationInput = $('input[name=location]').val();
+// ------------------ clearing the input field when user has entered a location-------------- 
 	    $('input[name=location]').val('');
-	    console.log(petApp.locationInput);
-	    // getting lat lng of user location
+// ------------------ pass on the location as the API's location search query-------------- 
 		$.when(petApp.getPet(petApp.locationInput), petApp.getShelter( petApp.locationInput)) 
-
+// ------------------ when the app's data is returned to us -------------- 
 			.done(function(gotPet, gotShelter){
+// ------------------ grab the pet array from pet data and store it in a new variable-------------- 
 				var pets = gotPet[0].petfinder.pets.pet;
+// ------------------ grab the shelter array from shelter data and store it in a new variable-------------- 
 				var shelters = gotShelter[0].petfinder.shelters.shelter;
-				// console.log(shelters)
+// ------------------ looping through shelter array-------------- 
 				//put this into it's own function - RANJAN
 				shelters.forEach(function(shelterObj) {
-					var filteredPets = pets.filter(function(petObj) {
+// ------------------ inside the loop, look for a match between shelters and pets-------------- 
+// ------------------ store the result in a shelter as the key to a new pet property-------------- 
+					shelterObj.pet = pets.filter(function(petObj) {
 						return petObj.shelterId.$t === shelterObj.id.$t
-					});
-					shelterObj.pet = filteredPets;//this takes each objects out of our shelters array, creats a property called pet, whichs stores out filtered puppies
-				});
+					});// /.filter
+// ------------------ creating a new property inside petApp, return all the shelters that have pets
+				});// forEach-------------- 
 				petApp.shelterWithPets = shelters.filter(function(shelterObj){
 					return shelterObj.pet.length > 0
-				});
-				//go through the shelters and look at the pets
-				//if the pets array is not empty, return that shelter object into a variable
-				//variable called shelter with pets.
-				// petApp.events(); come back to this to listen for on.change events
-				// petApp.initMap();
-
-				// once the second form i
+				});// /.filter
+// ------------------ if no map, start map. this statement hides map when page first loads-------------- 
 				if (petApp.mymap === undefined) {
 					petApp.initMap();
-				} 				
-				petApp.displayPet(petApp.shelterWithPets);
-				// console.log(petApp.shelterWithPets)
-
-
-
-			}) //done
+				} // if
+// ------------------ calling function to display shelter, pass query to only display shelter that have pets. 
+// --------------  In map.js, we grab those shelter's longtitude and latitude and assign them to makers	-------------- 	
+				petApp.displayShelter(petApp.shelterWithPets);
+			}) //.done
 			.fail(function(err1, err2) {
-				console.log(err1, err2)
-			}); //fail
-	});
-
-	$('.secondForm').on('submit', function(e) {
-		e.preventDefault();
-		// console.log($("input[type=checkbox]:checked").val())
+				alert('No Puppies for you :/')
+			}); //.fail
+	}); // form on submit
+// ------------------ defining eventlistener, when the status of checkboxes change-------------- 
+	$('input[type=checkbox]').on('change', function () {
+// ------------------ storing checkedboxes in a variable -------------- 
+// --------------  grabbing their values and turn those values into an array-------------- 
 		var checkedInputs = $('input[type=checkbox]:checked');
 		var checkedValues = checkedInputs.map(function(index, input) {
 			return $(input).val();
 		}).toArray();
-		// go through the checkedvalues array 
-		// gainn access to each value 
-		// console.log(petApp.shelterWithPets);
-		// for (var i = 0; i < checkedValues.length; i ++){
-			// go to our filteredPets thingy 
-			// get pets' age 
-			// filter out pets whose age match any checked values 
-
-			//Here we could clear the map
+// ------------------ remove previous layer of markers. create a new layer based on checked boxes-------------- 
 			petApp.mymap.removeLayer(petApp.markerGroup);
-			var newPets = petApp.shelterWithPets.map(function(shelter){
+// ------------------ reiterate previously filtered shelters-------------- 
+			var newShelter = petApp.shelterWithPets.map(function(shelter){
+// ------------------ reiterate checked values-------------- 
 				var filteredPets = checkedValues.map(function(criteria){
+// ------------------ reiterate previous pet array inside each shelter object-------------- 
 					return shelter.pet.filter(function(pet){
+// ------------------ look for property values inside each pet according to the criteria provded-------------- 
 						return pet.age.$t === criteria;
-					});
-				});
-				console.log(filteredPets);
-				var flattenedPets = $.map(filteredPets, function(n){
+					}); // /.filter
+				});// /.map
+// ------------------ pets filtered according to criteria, generate a new multidimensional array-------------- 
+// ------------------ flatten said array into a new one dimensional array -------------- 
+// -------------- store them as new property in each shelter object  -------------- 
+//--------------  leaving the proviously location-filtered pet array untouched -------------- 
+				shelter.finalpet = flattenedPets = $.map(filteredPets, function(n){
 					return n;
-				});
-				//Here display marker for each shelter
-				shelter.finalPets = flattenedPets;
-				return shelter
+				});// /$.map, a flatten method
+// ------------------ return a result of all shelters, store it in a variable creatied before -------------- 
+// --------------  newShelter. we use this array of shelters to decide which marker goes on the map-------------- 
+				return shelter;
+// ------------------ filter out shelters that don't have pets that match the user's criteria-------------- 
 			}).filter(function(shelter){
-				return shelter.finalPets.length > 0;
-			});		
-			console.log(newPets);
-			petApp.displayPet(newPets);
-			// var checkedPups = petApp.shelterWithPets.filter(function(shelter) {
-			// 	var dogs = shelter.pet.forEach(function(pup){
-			// 		var filteredValues = checkedValues.map(function(criteria){
-			// 			return 
-			// 		});
-			// });
+				return shelter.finalpet.length > 0;
+			});	// /.filter
+// ------------------ pass newly filtered shelter that have dogs that match user's criteria -------------- 
+// --------------  display those shelters on a map. -------------- 
+			petApp.displayShelter(newShelter);
+	}); // /.$('input[type=checkbox]').on('change',....)
 
-				// console.log(dogs)
-			// });
-
-		// };
-
-
-
-
-	});
-}; //end of init function
-
-
+}; // /.petApp.init()
+// ------------------ when document is ready, aka when page is loaded, start running petApp.-------------- 
 $(function() {
 	petApp.init();
-});
-
-// get data about puppies
-
-// once page is loaded, do ajax call
-
-// give the user an option to geoloate or put in location (postalcode/city, province)
-
-// filter out user's puppies based on form input value
-
-// take array of dogs's shelter id value
-
-// take array of shelter's shelter id value 
-
-// check dogs' shelter id value against array of shelter's shelter id value 
-
-// group dogs with the same shelter id
-
-//if the dog's shelter id matches shelter's shelter id, push into a= 
-
-// take matched shelter's location (lat; lng)
-
-// map out shelters
-
-// use a foreach loop to find pets and shelters
-
-// use a filter method to filter out pets that share the id we want 
+}); // /.documentReady
