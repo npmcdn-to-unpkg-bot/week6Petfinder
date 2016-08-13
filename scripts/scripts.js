@@ -77,42 +77,73 @@ petApp.init = function () {
 			}); //.fail
 	}); // form on submit
 // ------------------ defining eventlistener, when the status of checkboxes change-------------- 
-	$('input[type=checkbox]').on('change', function () {
-// ------------------ storing checkedboxes in a variable -------------- 
-// --------------  grabbing their values and turn those values into an array-------------- 
-		var checkedInputs = $('input[type=checkbox]:checked');
-		var checkedValues = checkedInputs.map(function(index, input) {
+	$('input[type=checkbox]').on('change', function (e) {
+		// e.preventDefault(); 
+		var checkedInputsAge = $('input[name=age]:checked');
+		var checkedValuesAge = checkedInputsAge.map(function(index, input) {
 			return $(input).val();
 		}).toArray();
-// ------------------ remove previous layer of markers. create a new layer based on checked boxes-------------- 
-			petApp.mymap.removeLayer(petApp.markerGroup);
-// ------------------ reiterate previously filtered shelters-------------- 
-			var newShelter = petApp.shelterWithPets.map(function(shelter){
-// ------------------ reiterate checked values-------------- 
-				var filteredPets = checkedValues.map(function(criteria){
-// ------------------ reiterate previous pet array inside each shelter object-------------- 
-					return shelter.pet.filter(function(pet){
-// ------------------ look for property values inside each pet according to the criteria provded-------------- 
-						return pet.age.$t === criteria;
-					}); // /.filter
-				});// /.map
-// ------------------ pets filtered according to criteria, generate a new multidimensional array-------------- 
-// ------------------ flatten said array into a new one dimensional array -------------- 
-// -------------- store them as new property in each shelter object  -------------- 
-//--------------  leaving the proviously location-filtered pet array untouched -------------- 
-				shelter.finalpet = flattenedPets = $.map(filteredPets, function(n){
+		checkedValuesAgeDefault = ["Baby", "Young", "Adult", "Senior"];
+			
+		var checkedInputsSize = $('input[name=size]:checked');
+		var checkedValuesSize = checkedInputsSize.map(function(index, input) {
+			return $(input).val();
+		}).toArray();
+		checkedValuesSizeDefault = ["S", "M", "L", "XL"];
+
+
+		petApp.mymap.removeLayer(petApp.markerGroup);
+
+		var filteringPets = function (shelterDataset, checkedValues, checkedDefault, filterCategory, petName, petName2) {
+			console.log(checkedValues);
+			petApp.newShelter = shelterDataset.map(function(shelter){
+				if (checkedValues.length !== 0) {
+					var filteredPets = checkedValues.map(function(criteria){ 
+						return shelter[petName].filter(function(pet){
+							if (filterCategory === 'age') {
+								return pet.age.$t === criteria;
+							} else if (filterCategory === 'size') {
+								return pet.size.$t === criteria;
+							}
+						}); // /.filter
+					});// /.map
+				} else {
+					var filteredPets = checkedDefault.map(function(criteria){ 
+					return shelter[petName].filter(function(pet){
+						if (filterCategory === 'age') {
+							return pet.age.$t === criteria;
+						} else if (filterCategory === 'size') {
+							return pet.size.$t === criteria;
+						}
+					});
+				});
+				}	
+				shelter[petName2] = flattenedPets = $.map(filteredPets, function(n){
 					return n;
 				});// /$.map, a flatten method
-// ------------------ return a result of all shelters, store it in a variable creatied before -------------- 
-// --------------  newShelter. we use this array of shelters to decide which marker goes on the map-------------- 
 				return shelter;
-// ------------------ filter out shelters that don't have pets that match the user's criteria-------------- 
 			}).filter(function(shelter){
-				return shelter.finalpet.length > 0;
-			});	// /.filter
-// ------------------ pass newly filtered shelter that have dogs that match user's criteria -------------- 
-// --------------  display those shelters on a map. -------------- 
-			petApp.displayShelter(newShelter);
+				return shelter[petName2].length > 0;
+			});	// /.filter	
+		};	
+
+		filteringPets(petApp.shelterWithPets, checkedValuesAge, checkedValuesAgeDefault, 'age', 'pet', 'finalpet');
+		filteringPets(petApp.newShelter, checkedValuesSize, checkedValuesSizeDefault, 'size', 'finalpet', 'finalpet2');
+
+
+
+		petApp.newShelter.forEach(function(shelter){
+			shelter.finalpet.forEach(function(finalPets){
+				console.log(finalPets.age.$t);
+			});
+		});
+		petApp.newShelter.forEach(function(shelter){
+			shelter.finalpet2.forEach(function(finalPets){
+				console.log(finalPets.size.$t);
+				console.log(petApp.newShelter);
+			});
+		});
+		petApp.displayShelter(petApp.newShelter);
 	}); // /.$('input[type=checkbox]').on('change',....)
 
 }; // /.petApp.init()
