@@ -4,134 +4,60 @@
 	<meta charset="UTF-8">
 	<title>Find Your Local Puppy</title>
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
-	<!-- <link rel="stylesheet" href="styles/Control.Geocoder.css"> -->
+	<link rel="stylesheet" href="https://npmcdn.com/flickity@2.0/dist/flickity.css" media="screen">
 	<link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
 	<header>
-		<h1>find your local puppy</h1>
+		<h1>placeholder title</h1>
+		<form action="" class="searchForm">
+			<input type="text" name="location" class="searchLocation">
+			<input type="submit">
+		</form>
 	</header>
 	<main>
-		<section class="form">
-			<form action="" class="searchForm">
-				<input type="text" name="location" class="searchLocation">
-				<!-- <select name="distance" id="distance">
-					<option value="10">within 10 miles</option>
-					<option value="25">within 25 miles</option>
-					<option value="50">within 50 miles</option>
-					<option value="100">within 100 miles</option>
-					<option value="any">any</option>
-				</select>
-				<select name="age" id="age">
-					<option value="Baby">Baby</option>
-					<option value="Young">puppy</option>
-					<option value="Adult">adult</option>
-					<option value="Senior">senior</option>
-					<option value="any">any</option>
-				</select>
-				<ul class="characteristics">
-					<li>
-						<input type="checkbox" id="trained" value="housetrained">
-						<label for="trained">trained</label>
-					</li>
-					<li>
-						<input type="checkbox" id="declawed" value="noClaws">
-						<label for="declawed">declawed</label>
-					</li>
-					<li>
-						<input type="checkbox" id="needs" value="specialNeeds">
-						<label for="needs">needs</label>
-					</li>
-				</ul>
-				<ul class="size">
-					<li>
-						<input type="checkbox" id="s" value="S">
-						<label for="s">s</label>
-					</li>
-					<li>
-						<input type="checkbox" id="m" value="M">
-						<label for="m">m</label>
-					</li>
-					<li>
-						<input type="checkbox" id="l" value="L">
-						<label for="l">l</label>
-					</li>
-					<li>
-						<input type="checkbox" id="xl" value="XL">
-						<label for="xl">xl</label>
-					</li>
-				</ul>
-				<ul class="houseHold">
-					<li>
-						<input type="checkbox" id="cat" value="noCats">
-						<label for="cat">cat</label>
-					</li>
-					<li>
-						<input type="checkbox" id="dog" value="noDogs">
-						<label for="dog">dog</label>
-					</li>
-					<li>
-						<input type="checkbox" id="kids" value="noKids">
-						<label for="kids">kids</label>
-					</li>
-				</ul> -->
-<!-- 				<div class="submitButton">
-					<input type="submit">
-				</div>
- -->			</form>
-		</section>
-
 		<section class="map">
-			<div id="mapid"></div>
+			<div class="wrapper mapForm">
+				<form action="" class="secondForm">
+					<fieldset id="age">
+						<input type="checkbox" value="Baby" id="baby" name="age"><label for="baby">Baby</label>
+						<input type="checkbox" value="Young" id="young" name="age"><label for="young">Young</label>
+						<input type="checkbox" value="Adult" id="adult" name="age"><label for="adult">Adult</label>
+						<input type="checkbox" value="Senior" id="senior" name="age"><label for="senior">Senior</label>
+					</fieldset>
+					<fieldset id="size">		
+						<input type="checkbox" value="S" id="s" name="size"><label for="s">Small</label>
+						<input type="checkbox" value="M" id="m" name="size"><label for="m">Medium</label>
+						<input type="checkbox" value="L" id="l" name="size"><label for="l">Large</label>
+						<input type="checkbox" value="XL" id="xl" name="size"><label for="xl">Extra Large</label>
+					</fieldset>
+					<fieldset id="sex">     
+		                <input type="checkbox" value="F" id="female" name="sex"><label for="female">Female</label>
+		                <input type="checkbox" value="M" id="male" name="sex"><label for="male">Male</label>
+		            </fieldset>
+				</form>
+				<div id="mapid"></div>	
+				<div class="container">
+					<div class="closeFlickity">
+						
+					</div>
+					<div class="flickity-container hide">
+						
+					</div>
+				</div>
+			</div>
 		</section>
-		<form action="" class="secondForm">
-			<fieldset id="age">
-				<input type="checkbox" value="Baby" id="baby" name="age"><label for="baby">Baby</label>
-				<input type="checkbox" value="Young" id="young" name="age"><label for="young">Young</label>
-				<input type="checkbox" value="Adult" id="adult" name="age"><label for="adult">Adult</label>
-				<input type="checkbox" value="Senior" id="senior" name="age"><label for="senior">Senior</label>
-			</fieldset>
-			<fieldset id="size">		
-				<input type="checkbox" value="S" id="s" name="size"><label for="s">Small</label>
-				<input type="checkbox" value="M" id="m" name="size"><label for="m">Medium</label>
-				<input type="checkbox" value="L" id="l" name="size"><label for="l">Large</label>
-				<input type="checkbox" value="XL" id="xl" name="size"><label for="xl">Extra Large</label>
-			</fieldset>
-			
-			<!-- <fieldset id="houseHold">		
-				<input type="checkbox" value="noCats" id="s" name="character"><label for="s">Small</label>
-				<input type="checkbox" value="M" id="m" name="character"><label for="m">Medium</label>
-				<input type="checkbox" value="L" id="l" name="character"><label for="l">Large</label>
-				<input type="checkbox" value="XL" id="xl" name="character"><label for="xl">Extra Large</label>
-			</fieldset>
-	
-			<ul class="houseHold">
-				<li>
-					<input type="checkbox" id="cat" value="noCats">
-					<label for="cat">cat</label>
-				</li>
-				<li>
-					<input type="checkbox" id="dog" value="noDogs">
-					<label for="dog">dog</label>
-				</li>
-				<li>
-					<input type="checkbox" id="kids" value="noKids">
-					<label for="kids">kids</label>
-				</li> -->
-
-		<!-- 	<fieldset id="character">		
-				<input type="checkbox" value="housetrained" id="trained" name="household"><label for="trained">House Trained</label>
-				<input type="checkbox" value="noClaws" id="noClaws" name="household"><label for="noClaws">Declawed</label>
-				<input type="checkbox" value="specialNeeds" id="needs" name="household"><label for="needs">Special Needs</label>
-			</fieldset> -->
-			<!-- <input type="submit"> -->
-		</form>
 	</main>
+	<footer>
+		<div class="wrapper footer">
+			<p>Copyright © 2016 Created and Designed by <a href="http://joykliu.io">Joy Liu</a>, <a href="http://ranjan.ca">Ranjan Subbiah</a> and <a href="andrew-thompson.co">Andrew Thompson</a>. Powered by <a href="https://petfinders.com/">Petfinder</a> and <a href="http://leafletjs.com/"> Leaflet</a></p>
+		</div>
+	</footer>
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://npmcdn.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
   	<script src="scripts/scripts.js"></script>
   	<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-  	<script src="scripts/Control.Geocoder.js"></script>
   	<script src="scripts/map.js"></script>
 
 </body>

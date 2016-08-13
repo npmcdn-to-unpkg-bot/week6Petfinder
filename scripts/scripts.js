@@ -15,7 +15,7 @@ petApp.getPet = function (query) {
 				location: query,
 				format: 'json',
 				animal: "dog",
-				count: 100
+				count: 200
 			} // /data
 	});// /$.ajax
 };// /.getPet
@@ -91,11 +91,23 @@ petApp.init = function () {
 		}).toArray();
 		checkedValuesSizeDefault = ["S", "M", "L", "XL"];
 
+		var checkedInputsSex = $('input[name=sex]:checked');
+		var checkedValuesSex = checkedInputsSex.map(function(index, input) {
+			return $(input).val();
+		}).toArray();
+		checkedValuesSexDefault = ["F", "M"];
+
+		// var checkedInputsChar = $('input[name=char]:checked');
+		// var checkedValuesChar = checkedInputsChar.map(function(index, input) {
+		// 	return $(input).val();
+		// }).toArray();
+		// checkedValuesCharDefault = ["housetrained", "noClaws", "specialNeeds"];
+
 
 		petApp.mymap.removeLayer(petApp.markerGroup);
 
 		var filteringPets = function (shelterDataset, checkedValues, checkedDefault, filterCategory, petName, petName2) {
-			console.log(checkedValues);
+			
 			petApp.newShelter = shelterDataset.map(function(shelter){
 				if (checkedValues.length !== 0) {
 					var filteredPets = checkedValues.map(function(criteria){ 
@@ -104,6 +116,8 @@ petApp.init = function () {
 								return pet.age.$t === criteria;
 							} else if (filterCategory === 'size') {
 								return pet.size.$t === criteria;
+							} else if (filterCategory === 'sex') {
+								return pet.sex.$t === criteria;
 							}
 						}); // /.filter
 					});// /.map
@@ -114,6 +128,8 @@ petApp.init = function () {
 							return pet.age.$t === criteria;
 						} else if (filterCategory === 'size') {
 							return pet.size.$t === criteria;
+						} else if (filterCategory === 'sex') {
+							return pet.sex.$t === criteria;
 						}
 					});
 				});
@@ -129,18 +145,25 @@ petApp.init = function () {
 
 		filteringPets(petApp.shelterWithPets, checkedValuesAge, checkedValuesAgeDefault, 'age', 'pet', 'finalpet');
 		filteringPets(petApp.newShelter, checkedValuesSize, checkedValuesSizeDefault, 'size', 'finalpet', 'finalpet2');
+		filteringPets(petApp.newShelter, checkedValuesSex, checkedValuesSexDefault, 'sex', 'finalpet2', 'finalpet3');
 
 
 
+		// petApp.newShelter.forEach(function(shelter){
+		// 	shelter.finalpet.forEach(function(finalPets){
+		// 		console.log(finalPets.age.$t);
+		// 	});
+		// });
+		console.log(petApp.newShelter);
 		petApp.newShelter.forEach(function(shelter){
-			shelter.finalpet.forEach(function(finalPets){
-				console.log(finalPets.age.$t);
-			});
-		});
-		petApp.newShelter.forEach(function(shelter){
-			shelter.finalpet2.forEach(function(finalPets){
+			shelter.finalpet3.forEach(function(finalPets){
 				console.log(finalPets.size.$t);
-				console.log(petApp.newShelter);
+				console.log(finalPets.age.$t);
+				if (finalPets.sex.$t === "M") {
+					console.log("Male");
+				} else if (finalPets.sex.$t === "F"){
+					console.log("Female");
+				}
 			});
 		});
 		petApp.displayShelter(petApp.newShelter);

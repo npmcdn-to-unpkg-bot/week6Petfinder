@@ -6,3 +6,36 @@
 .secondForm {
 	display: none;
 }
+
+header {
+	height: 100vh;
+	text-align: center;
+	text-transform: uppercase;
+	background: $redc;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+
+	> form {
+		input[type=text] {
+			border: none; 
+			padding: 10px 5px;
+			width: 300px;
+		}
+		input[type=submit] {
+			border: none; 
+			padding: 10px 5px;
+			width: 100px;
+			background: white;
+			border: 3px solid $redc;
+			transition: 0.3s;
+			font-weight: bold;
+			text-transform: uppercase;
+
+			&:hover, &:focus {
+				border: 3px solid $greenc;
+			}
+		}
+	}
+}
