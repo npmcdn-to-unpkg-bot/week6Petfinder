@@ -1,0 +1,60 @@
+// ----- large containers -----//
+section, header, footer, main {
+	width: 100%;
+}
+
+.wrapper {
+	max-width: 1170px;
+	margin: 0 auto;
+}
+
+.container, .flickity-container {
+	z-index: 99;
+	background: #eee;
+}
+
+.container {
+	position: relative;
+	width: 100%;
+
+	.closeFlickity {
+		width: 100px;
+		height: 100px;
+		background: red;
+		position: absolute;
+		right: 0;
+	}
+
+	.flickity-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 500px;
+		width: 30%;
+
+		&.hide {
+			display: none;
+		}
+	}
+}
+
+// ----- typography ----- //
+h1, h2 {
+	font-family: $headingFont; 
+}
+
+h3, p, label, a, input {
+	font-family: $bodyFont;
+	color: $blackc;
+}
+
+a, a:hover, a:focus, a:active {
+	outline: 0;
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+a:hover {
+	color: $greenc;
+}
+
