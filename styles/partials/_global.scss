@@ -46,6 +46,7 @@ h1, h2 {
 h3, p, label, a, input {
 	font-family: $bodyFont;
 	color: $blackc;
+	margin: 0;
 }
 
 a, a:hover, a:focus, a:active {
