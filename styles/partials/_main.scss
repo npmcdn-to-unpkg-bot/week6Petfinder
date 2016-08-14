@@ -1,8 +1,3 @@
-#mapid {
-	height: 500px;
-	width: 500px;
-}
-
 .secondForm {
 	display: none;
 }
@@ -16,7 +11,7 @@ header {
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-
+	
 	> form {
 		input[type=text] {
 			border: none; 
@@ -38,4 +33,127 @@ header {
 			}
 		}
 	}
+}
+main {
+	height: 95vh;
+	position: relative;
+}
+
+.map {
+	display: flex;
+	#mapid {
+		height: 93vh;
+		width: 70%;
+	}
+}
+
+.closeFlickity {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        bottom: 20px;
+        right: 10px;
+}
+
+.secondForm {
+	width: 30%;
+	margin-top: 20px;
+
+	fieldset {
+		padding: 30px 5px;
+		border: 0;
+	}
+}
+
+.hide {
+	display: none;
+}
+
+footer {
+	p {
+		text-align: center;
+		padding: 10px;
+	}
+}
+
+svg g > path {
+	fill-opacity: 0;
+    stroke: #000;
+    stroke-width: 0.25;
+    stroke-linejoin: bevel;
+    stroke-dashoffset: 666;
+    animation: draw 100s linear;
+
+}
+
+g.pathOne > path {
+    stroke-dasharray: 666;
+    fill-opacity: 0;
+    stroke: #000;
+    stroke-width: 0.25;
+    stroke-linejoin: bevel;
+    stroke-dashoffset: 666;
+    animation: draw 50s linear;
+}
+
+g.pathTwo > path {
+    stroke-dasharray: 666;
+    fill-opacity: 0;
+    stroke: #000;
+    stroke-width: 0.25;
+    stroke-linejoin: bevel;
+    stroke-dashoffset: 666;
+    animation: draw 50s linear;
+    animation-delay: 0.8s;
+}
+
+g.pathThree > path {
+    stroke-dasharray: 666;
+    fill-opacity: 0;
+    stroke: #000;
+    stroke-width: 0.25;
+    stroke-linejoin: bevel;
+    stroke-dashoffset: 666;
+    animation: draw 50s linear;
+    animation-delay: 1.6s;
+}
+
+g.pathFour > path {
+    stroke-dasharray: 666;
+    fill-opacity: 0;
+    stroke: #000;
+    stroke-width: 0.25;
+    stroke-linejoin: bevel;
+    stroke-dashoffset: 666;
+    animation: draw 50s linear;
+    animation-delay: 2.4s;
+}
+
+g.pathFive > path {
+    stroke-dasharray: 666;
+    fill-opacity: 0;
+    stroke: #000;
+    stroke-width: 0.25;
+    stroke-linejoin: bevel;
+    stroke-dashoffset: 666;
+    animation: draw 50s linear;
+    animation-delay: 3.2s;
+}
+
+g.pathSix > path {
+    stroke-dasharray: 666;
+    fill-opacity: 0;
+    stroke: #000;
+    stroke-width: 0.25;
+    stroke-linejoin: bevel;
+    stroke-dashoffset: 666;
+    animation: draw 50s linear;
+    animation-delay: 4s;
+}
+
+@keyframes draw {
+  100% {
+    stroke-dashoffset: 0;
+  }
 }

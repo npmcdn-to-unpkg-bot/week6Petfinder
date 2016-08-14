@@ -31,7 +31,18 @@ petApp.displayShelter = function(shelters){
 	shelters.forEach(function(shelterLocation){
 // ------------------ use leaflet L.latLng to create readable latitude and longtitide, and store in variable.
 		var myPopup = L.DomUtil.create('div', 'infoWindow');
-		myPopup.innerHTML = `<div data-shelterID="${shelterLocation.id.$t}"><p>${shelterLocation.name["$t"]}</p></div>`;
+		myPopup.innerHTML = `
+			<div data-shelterID="${shelterLocation.id.$t}">
+			<div class="clientDog">
+			<img src="images/barkingDog.svg" alt="drawing of a barking dog" />
+			</div>
+			<div class="shelterInfo">
+			<h3>${shelterLocation.name["$t"]}</h3>
+			<p>${shelterLocation.city["$t"]}, ${shelterLocation.state["$t"]} ${shelterLocation.zip["$t"]}</p>
+			<p>${shelterLocation.email.$t}
+			</div>
+			</div>
+		`;
 		var latLng = L.latLng(shelterLocation.latitude.$t, shelterLocation.longitude.$t);
 // ------------------ use leaflet L.marker() and pass on the L.latLng() to create readable marker elements
 		// var marker = L.marker(latLng, {

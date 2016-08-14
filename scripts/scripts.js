@@ -67,6 +67,10 @@ petApp.init = function () {
 // ------------------ if no map, start map. this statement hides map when page first loads-------------- 
 				if (petApp.mymap === undefined) {
 					petApp.initMap();
+					$("main").removeClass("hide");
+					$("footer").removeClass("hide");
+					$("footer").get(0).scrollIntoView();
+					
 				} // if
 // ------------------ calling function to display shelter, pass query to only display shelter that have pets. 
 // --------------  In map.js, we grab those shelter's longtitude and latitude and assign them to makers	-------------- 	
@@ -147,8 +151,6 @@ petApp.init = function () {
 		filteringPets(petApp.newShelter, checkedValuesSize, checkedValuesSizeDefault, 'size', 'finalpet', 'finalpet2');
 		filteringPets(petApp.newShelter, checkedValuesSex, checkedValuesSexDefault, 'sex', 'finalpet2', 'finalpet3');
 
-
-
 		// petApp.newShelter.forEach(function(shelter){
 		// 	shelter.finalpet.forEach(function(finalPets){
 		// 		console.log(finalPets.age.$t);
@@ -173,4 +175,5 @@ petApp.init = function () {
 // ------------------ when document is ready, aka when page is loaded, start running petApp.-------------- 
 $(function() {
 	petApp.init();
+
 }); // /.documentReady
