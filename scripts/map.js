@@ -2,15 +2,13 @@
 // ------------------ storing action required to start loading map
 petApp.initMap = function() {
 // ------------------ look for element with id of 'mapid', chain .map method to it, store it in a property inside petApp
-	petApp.mymap = L.map('mapid');
-// ------------------ grabbing tileLay from mapBox
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-	    maxZoom: 18,
-	    id: 'joy9017mapbox.11h51ekk',
-	    accessToken: 'pk.eyJ1Ijoiam95OTAxN21hcGJveCIsImEiOiJjaW94M2RneXQwMDJ1d2ZtNXp4a29pbTV4In0.TebEkoRfRP8E0hw_Nd3PFA'
-// ------------------ add tilelayer to petApp.mymap to be ready to initiate map
-	}).addTo(petApp.mymap);
+	var accessToken = 'pk.eyJ1Ijoiam95OTAxN21hcGJveCIsImEiOiJjaW94M2RneXQwMDJ1d2ZtNXp4a29pbTV4In0.TebEkoRfRP8E0hw_Nd3PFA';
+		// Replace 'mapbox.streets' with your map id.
+	var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}@2x.png?access_token=' + accessToken, {
+	    attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	});
+	
+	petApp.mymap = L.map('mapid').addLayer(mapboxTiles);
 };// /.initMap()
 
 // ------------------ defining function to use to display shelters

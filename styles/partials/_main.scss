@@ -41,6 +41,7 @@ main {
 
 .map {
 	display: flex;
+    background-color: lightblue;
 	#mapid {
 		height: 93vh;
 		width: 70%;
@@ -58,12 +59,27 @@ main {
 
 .secondForm {
 	width: 30%;
-	margin-top: 20px;
+	margin: 100px 10px;
+    .secondForm__title {
+        font-size: 30px;
+    }
+    input[type='checkbox'] {
+        visibility: hidden;
+    }
+    p {
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
 
 	fieldset {
 		padding: 30px 5px;
 		border: 0;
 	}
+}
+
+svg.smallDog {
+    font-size: 20px;
 }
 
 .hide {
@@ -90,7 +106,7 @@ svg g > path {
 g.pathOne > path {
     stroke-dasharray: 666;
     fill-opacity: 0;
-    stroke: #000;
+    stroke: $greenc;
     stroke-width: 0.25;
     stroke-linejoin: bevel;
     stroke-dashoffset: 666;
@@ -100,7 +116,7 @@ g.pathOne > path {
 g.pathTwo > path {
     stroke-dasharray: 666;
     fill-opacity: 0;
-    stroke: #000;
+    stroke: $greenc;
     stroke-width: 0.25;
     stroke-linejoin: bevel;
     stroke-dashoffset: 666;
