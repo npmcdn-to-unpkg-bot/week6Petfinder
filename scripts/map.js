@@ -45,23 +45,24 @@ petApp.displayShelter = function(shelters){
 		`;
 		var latLng = L.latLng(shelterLocation.latitude.$t, shelterLocation.longitude.$t);
 // ------------------ use leaflet L.marker() and pass on the L.latLng() to create readable marker elements
-		// var marker = L.marker(latLng, {
-		// 	alt: shelterLocation.name.$t, 
-		// 	title: shelterLocation.name.$t
-		// })
+		var markerIcon = L.icon ({
+			iconUrl: "./images/marker.png",
+			iconAnchor: [16, 40],
+			popupAnchor:  [0, -33]
+		});
+
 		var marker = new L.shelterMarker(latLng, {
 			alt: shelterLocation.name.$t, 
 			title: shelterLocation.name.$t,
-			shelterID: shelterLocation.id.$t
+			shelterID: shelterLocation.id.$t,
+			icon: markerIcon
 		})
+		console.log(marker)
 		marker.bindPopup(myPopup);
-		petApp.mymap.on("popupopen", function (e) {
-		
-		});1
 		// console.log("mypopup", marker);
 		myPopup.addEventListener("click",  function() {
 			$('.flickity-container').empty().removeClass("hide");
-
+			$('.closeFlickity').removeClass("hide");
 			var popupDivID = $(this).children()[0].dataset.shelterid;
 			petApp.shelterWithPets.forEach(function(shelter){
 				if ($.isEmptyObject(shelter.finalpet3)){
@@ -70,7 +71,7 @@ petApp.displayShelter = function(shelters){
 							$(".flickity-container").append(`
 								<div class="carouselElem">
 									<div class="pupPic">
-										<img src="${pup.media.photos.photo[0].$t}" alt="picture of ${pup.name.$t}" />
+										<img src="${pup.media.photos.photo[2].$t}" alt="picture of ${pup.name.$t}" />
 									</div>
 									<div class="pupInfo">
 										<h3>${pup.name.$t}</h3>
@@ -86,7 +87,7 @@ petApp.displayShelter = function(shelters){
 							$(".flickity-container").append(`
 								<div class="carouselElem">
 									<div class="pupPic">
-										<img src="${pup.media.photos.photo[0].$t}" alt="picture of ${pup.name.$t}" />
+										<img src="${pup.media.photos.photo[2].$t}" alt="picture of ${pup.name.$t}" />
 									</div>
 									<div class="pupInfo">
 										<h3>${pup.name.$t}</h3>
@@ -101,7 +102,7 @@ petApp.displayShelter = function(shelters){
 			$(".closeFlickity").on('click', function(){
 				$(".flickity-container").flickity("destroy");
 				$(".flickity-container").addClass("hide");
-				
+				$(this).addClass("hide");
 			})
 			$(".flickity-container").flickity({ "imagesLoaded": true });
 		});//.addEventListener

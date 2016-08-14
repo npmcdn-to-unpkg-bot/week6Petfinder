@@ -157,3 +157,13 @@ g.pathSix > path {
     stroke-dashoffset: 0;
   }
 }
+
+.carouselElem {
+    width: 100%;
+    display: flex;
+    .pupPic {
+        img {
+            height: 350px;
+        }
+    }
+}
