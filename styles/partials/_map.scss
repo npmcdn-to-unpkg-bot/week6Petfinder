@@ -1,0 +1,107 @@
+// ---------------- map ----------- //
+main {
+    background-color: whitesmoke;
+    color: $rock;
+	
+    .mapWrapper {
+    	display: flex;
+        position: relative;
+        flex-direction: column-reverse;
+        padding: 50px 0;
+
+
+    	#mapid {
+    		height: 70vh;
+            width: 1170px;
+            margin: 0 auto;
+        }
+    }
+}
+
+.secondForm {
+    width: 100%;
+    margin: 10px;
+
+    form {
+        width: 100%;
+        display: flex;
+        align-items: top;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+       > h2 {
+            font-size: 30px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    fieldset {
+        border: 0;
+        width: 30%;
+    }
+    input[type="checkbox"] + label  {
+
+        svg {
+            fill: $rock;
+            display: block;
+            margin: 0 auto;
+        }
+
+        p {
+            color: $rock;
+        }
+    }
+
+    input[type="checkbox"] {
+        opacity: 0;
+
+        &:checked + label {
+            svg {
+                fill: #EF6550;
+            }
+
+            p {
+                color: #EF6550;
+            }
+        }
+    }
+
+    p {
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 15px;
+        color: $rock;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    label > p {
+        font-size: 12px;
+        color: $rock;
+
+    }
+}
+.checkBoxesWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .checkboxSizeAge {
+        width: 37%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }  
+
+    .checkboxGender {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }      
+}
+

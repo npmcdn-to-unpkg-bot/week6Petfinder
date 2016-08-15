@@ -39,6 +39,7 @@ petApp.init = function () {
 	$('.searchForm').on('submit', function(e) {
 // ------------------ prevent default form page refreshing action-------------- 
 	    e.preventDefault(); 
+	    $('.svgWrapper').fadeIn();
 // ------------------ grab the user's locaiton input value-------------- 
 	    petApp.locationInput = $('input[name=location]').val();
 // ------------------ clearing the input field when user has entered a location-------------- 
@@ -69,8 +70,7 @@ petApp.init = function () {
 					petApp.initMap();
 					$("main").removeClass("hide");
 					$("footer").removeClass("hide");
-					$("footer").get(0).scrollIntoView();
-					
+					$("footer").get(0).scrollIntoView({ duration: "slow", direction: "y"});
 				} // if
 // ------------------ calling function to display shelter, pass query to only display shelter that have pets. 
 // --------------  In map.js, we grab those shelter's longtitude and latitude and assign them to makers	-------------- 	

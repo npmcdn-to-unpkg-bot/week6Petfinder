@@ -1,0 +1,80 @@
+// ----- flickity ------ //
+
+.mapWrapper {
+	position: relative;
+	padding: 50px 0;
+}
+
+.containerFlickity, .flickity-container {
+    z-index: 99;
+	background-color: rgba(52, 73, 94, .65);
+}
+
+.containerFlickity {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	margin: 0 auto;
+	z-index: 10000;
+
+	.flickityWrapper {
+		position: relative;
+		width: 100%;
+
+	    .closeFlickity {
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			z-index: 10000;
+		}
+
+		.flickity-container {
+			width: 50%;
+			margin: 0 auto;
+			height: 93vh;
+
+			&.hide {
+				display: none;
+			}
+
+			.pupPic {
+				margin: 0 auto;
+			}
+		}	
+	}
+}
+
+.carouselElem {
+   width: 100%;
+	margin: 0 auto;
+	
+	.pupHead h3{
+		display: block;
+		margin: 10px;
+		text-align: center
+	}
+	.pupPic {
+		img {
+			height: 350px;
+			margin: 0 auto;
+			display: block
+	   	}
+   }
+	.pupInfo h3, p {
+	   text-align: center;
+	   color: #fff;
+   }
+   
+}
+
+.carousel-title {
+   font-size: 25px;
+   margin: 10px;
+   color: #fff;
+}
+
+.carousel-subtitle {
+   font-size: 20px;
+   margin: 5px;
+   color: #fff;
+}
