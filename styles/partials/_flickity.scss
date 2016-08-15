@@ -1,0 +1,85 @@
+.mapWrapper {
+	position: relative;
+	padding: 50px 0;
+}
+
+.containerFlickity {
+    z-index: 99;
+    background-color: rgba($rock, .8);
+}
+
+.flickity-container {
+	 z-index: 99;
+}
+.containerFlickity {
+    position: absolute;
+	bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 10000;
+
+    .flickityWrapper {
+    	position: relative;
+		width: 100%;
+
+	    .closeFlickity {
+	        position: absolute;
+	        right: 10px;
+	        top: 10px;
+	        z-index: 10000;
+
+	        img {
+	        	width: 45%;
+	        	display: block;
+	        	margin: 0 auto;
+	        	cursor: pointer;
+	        }
+	    }
+	    .flickity-container {
+	        width: 50%;
+	        margin: 0 auto;
+	        height: 80vh;
+
+	        &.hide {
+	            display: none;
+	        }
+	        .pupPic {
+	            margin: auto 0;
+	        }
+	    }
+		
+    }
+
+}
+.carouselElem {
+    width: 100%;
+    margin: 0 auto;
+    // display: flex;
+    .pupHead h3{
+        display: block;
+        margin: 10px;
+        text-align: center
+    }
+    .pupPic {
+        img {
+            height: 350px;
+            margin: 0 auto;
+            display: block
+        }
+    }
+    .pupInfo h3, p {
+        text-align: center;
+        color: whitesmoke;
+    }
+    
+}
+.carousel-title {
+    font-size: 25px;
+    margin: 10px;
+    color: whitesmoke;
+}
+.carousel-subtitle {
+    font-size: 20px;
+    margin: 5px;
+    color: whitesmoke;
+}

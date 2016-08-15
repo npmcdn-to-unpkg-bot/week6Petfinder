@@ -7,8 +7,9 @@ petApp.initMap = function() {
 	var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}@2x.png?access_token=' + accessToken, {
 	    attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	});
-	
+
 	petApp.mymap = L.map('mapid').addLayer(mapboxTiles);
+	petApp.mymap.scrollWheelZoom.disable();
 };// /.initMap()
 
 // ------------------ defining function to use to display shelters
@@ -68,12 +69,18 @@ petApp.displayShelter = function(shelters){
 						if(pup.shelterId.$t === popupDivID) {
 							$(".flickity-container").append(`
 								<div class="carouselElem">
+									<div class="pupHead">
+										<h3 class="carousel-subtitle">${shelter.city.$t}</h3>
+										<h3 class="carousel-title">${shelter.name.$t}</h3>
+									</div>
 									<div class="pupPic">
 										<img src="${pup.media.photos.photo[2].$t}" alt="picture of ${pup.name.$t}" />
 									</div>
 									<div class="pupInfo">
-										<h3>${pup.name.$t}</h3>
-										<p>${pup.description.$t}</p>
+										<h3 class="carousel-title">${pup.name.$t}</h3>
+										<p>Age: ${pup.age.$t}</p>
+										<p>Size: ${pup.size.$t}</p>
+										<p>Gender: ${pup.sex.$t}</p>
 									</div>
 								</div>
 							`)
@@ -84,12 +91,18 @@ petApp.displayShelter = function(shelters){
 						if(pup.shelterId.$t === popupDivID) {
 							$(".flickity-container").append(`
 								<div class="carouselElem">
+									<div class="pupHead">
+										<h3>${shelter.city.$t}</h3>
+										<h3>${shelter.name.$t}</h3>
+									</div>
 									<div class="pupPic">
 										<img src="${pup.media.photos.photo[2].$t}" alt="picture of ${pup.name.$t}" />
 									</div>
 									<div class="pupInfo">
 										<h3>${pup.name.$t}</h3>
-										<p>${pup.description.$t}</p>
+										<p>Age: ${pup.age.$t}</p>
+										<p>Size: ${pup.size.$t}</p>
+										<p>Gender: ${pup.sex.$t}</p>
 									</div>
 								</div>
 							`)
@@ -102,7 +115,7 @@ petApp.displayShelter = function(shelters){
 				$(".flickity-container").addClass("hide");
 				$(this).addClass("hide");
 			})
-			$(".flickity-container").flickity({ "imagesLoaded": true });
+			$(".flickity-container").flickity({ "imagesLoaded": true, "pageDots": false });
 		});//.addEventListener
 // ------------------ bind a pop to each marker, put content in popup box
 		
