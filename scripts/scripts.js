@@ -70,7 +70,9 @@ petApp.init = function () {
 					petApp.initMap();
 					$("main").removeClass("hide");
 					$("footer").removeClass("hide");
-					$("footer").get(0).scrollIntoView({ duration: "slow", direction: "y"});
+					setTimeout(function(){
+						$('html, body').animate({scrollTop:750}, 1000);	
+					}, 2200)
 				} // if
 // ------------------ calling function to display shelter, pass query to only display shelter that have pets. 
 // --------------  In map.js, we grab those shelter's longtitude and latitude and assign them to makers	-------------- 	
