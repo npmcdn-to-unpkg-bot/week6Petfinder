@@ -1,25 +1,29 @@
-"use strict";
+'use strict'
 
-var gulp = require("gulp");
-var sass = require("gulp-sass");
-var concat = require("gulp-concat");
-var injectSvg = require("gulp-inject-svg");
-var autoprefixer = require("gulp-autoprefixer");
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const concat = require('gulp-concat');
+const babel = require('gulp-babel');
+const autoprefixer = require('gulp-autoprefixer');
+// const reload = browserSync.reload;
 
-gulp.task("styles", function(){
-	return gulp.src("./styles/**/*.scss")
-	.pipe(sass().on("error", sass.logError))
-	.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
-	.pipe(concat("style.css"))
-	.pipe(gulp.dest("./styles/"))
+gulp.task('styles', () => {
+	return gulp.src('./styles/**/*.scss')
+		.pipe(sass().on('error', sass.logError))
+		.pipe(concat('style.css'))
+		.pipe(gulp.dest('./styles/'))
+		.pipe(reload({stream: true}));
 });
 
-gulp.task("injectSvg", function(){
-	return gulp.src("./**/*.html")
-	.pipe(injectSvg())
-	.pipe(gulp.dest("./"))
+gulp.task('watch',() => {
+	gulp.watch('./styles/**/*.scss', ['styles']);
+	// gulp.watch('./scripts/*.js', ['scripts']);
 });
 
-gulp.task("watch", function(){
-	gulp.watch("./styles/**/*.scss", ["styles"]);
+gulp.task('scripts', () => {
+	gulp.src('./scripts/scripts.js')
+		.pipe(babel({
+			presets: ['es2015']
+		}))
+		.pipe(gulp.dest('./scripts'))
 });

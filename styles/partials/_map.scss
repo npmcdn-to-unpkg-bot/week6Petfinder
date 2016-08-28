@@ -29,6 +29,10 @@ main {
         justify-content: space-between;
         flex-wrap: wrap;
 
+        @include media-query(mobile) {
+            display: block;
+        }
+
        > h2 {
             font-size: 30px;
             width: 100%;
@@ -39,6 +43,11 @@ main {
     fieldset {
         border: 0;
         width: 30%;
+        
+        @include media-query(mobile){
+            width: 100%;
+        }
+        
     }
     input[type="checkbox"] + label  {
 

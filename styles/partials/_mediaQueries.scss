@@ -1,0 +1,10 @@
+$mobile: 746;
+// $mobile: 460px;
+@mixin media-query($media-query) {
+
+	@if $media-query == mobile {
+		@media only screen and (max-width: $mobile) {
+			@content;
+		}
+	}
+}

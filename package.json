@@ -1,5 +1,5 @@
 {
-  "name": "petfinder",
+  "name": "joy_week6_petfinder",
   "version": "1.0.0",
   "description": "Week 6 project sourcing the pet finder api.",
   "main": "index.js",
@@ -8,19 +8,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AndrewWeb-Dev/week6Petfinder.git"
+    "url": "git+https://github.com/joykliu/week6Petfinder.git"
   },
-  "author": "",
+  "author": "joykliu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AndrewWeb-Dev/week6Petfinder/issues"
+    "url": "https://github.com/joykliu/week6Petfinder/issues"
   },
-  "homepage": "https://github.com/AndrewWeb-Dev/week6Petfinder#readme",
-  "devDependencies": {
+  "homepage": "https://github.com/joykliu/week6Petfinder#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.13.2",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.0",
-    "gulp-inject-svg": "^0.1.4",
     "gulp-sass": "^2.3.2"
   }
 }

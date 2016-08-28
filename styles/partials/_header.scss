@@ -12,12 +12,6 @@ header {
         margin-bottom: 3vh;
         position: relative;
 
-        // span {
-        //     // font-style: italic;
-        //     color: $flamingo;
-        //     text-transform: lowercase;
-        // }
-
         &:after {
             content:"";
             position: absolute;
@@ -26,15 +20,14 @@ header {
             left: calc(50% - 100px);
             height: 4px;
             background: $flamingo;
-
         }
     }
-	
+
 	> form {
         padding-top: 10vh;
 
 		input[type="text"] {
-			border: 3px solid $rock; 
+			border: 3px solid $rock;
             background: $rock;
             color: whitesmoke;
 			padding: 10px 5px;
@@ -42,7 +35,7 @@ header {
 		}
 
 		input[type="submit"] {
-			border: none; 
+			border: none;
 			padding: 10px 5px;
             margin-top: 5vh;
 			width: 100px;
