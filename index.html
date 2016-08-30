@@ -259,6 +259,18 @@
   	<script src="scripts/map.js"></script>
 	<!-- ============ PAWS FADING IN ==========  -->
 	<script>
+		$(function(){
+			if (document.documentElement.clientWidth <= 500) {
+				console.log('its clicked');
+				$('.secondForm p').on('click', function() {
+					console.log('its clicked');
+					$(this).siblings('.checkBoxesWrapper').slideToggle();
+					$(this).css('font-weight', 'bold');
+				});
+			}
+		});
+	</script>
+	<script>
         $(function(){
             $('g.paw1').fadeIn(3000, function(){
                 $('g.paw2').fadeIn(800, function(){
@@ -275,12 +287,6 @@
                     });
                 });
             });
-			if (document.documentElement.clientWidth <= 500) {
-				$('.secondForm p').on('click', function() {
-					$(this).siblings('.checkBoxesWrapper').slideToggle();
-					$(this).css('font-weight', 'bold');
-				});
-			}
         });
     </script>
 	<!-- CREDITS

@@ -204,7 +204,8 @@ header {
       color: whitesmoke;
       padding: 10px 5px;
       margin-top: 40px;
-      width: 300px; }
+      width: 300px;
+      -webkit-appearance: none; }
     header > form input[type="submit"] {
       border: none;
       padding: 10px 5px;
@@ -214,7 +215,8 @@ header {
       border: 3px solid #513531;
       transition: 0.3s;
       font-weight: bold;
-      text-transform: uppercase; }
+      text-transform: uppercase;
+      -webkit-appearance: none; }
       header > form input[type="submit"]:hover, header > form input[type="submit"]:focus {
         border: 3px solid #EF6550; }
     header > form label {
@@ -246,7 +248,7 @@ main {
     display: flex;
     position: relative;
     flex-direction: column-reverse;
-    padding: 50px 0; }
+    padding: 0 0 50px 0; }
     main .mapWrapper #mapid {
       height: 50vh;
       width: 100%;
@@ -374,6 +376,18 @@ main {
         padding: 10px;
         width: 100%; } }
 
+.infoWindow > div .clientDog img {
+  margin: 0 auto;
+  display: block; }
+
+.infoWindow > div .shelterInfo {
+  margin-top: 15px;
+  font-size: 15px;
+  text-align: center;
+  width: 100%; }
+  .infoWindow > div .shelterInfo p {
+    margin: 10px 0; }
+
 fieldset {
   border: 0; }
 
@@ -428,8 +442,8 @@ fieldset {
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 15px;
-  background: whitesmoke; }
+  padding: 10px;
+  background: rgba(245, 245, 245, 0.85); }
   .pupPic img {
     max-height: 375px;
     max-width: 100%;
@@ -437,11 +451,13 @@ fieldset {
     margin: 0 auto; }
   @media only screen and (max-width: 500px) {
     .pupPic {
-      width: 90%; } }
+      width: 70%; }
+      .pupPic img {
+        max-height: 300px; } }
 
 .pupDetail {
   width: 50%;
-  background: whitesmoke;
+  background: rgba(245, 245, 245, 0.85);
   margin: 20px auto 0 auto;
   padding: 15px 40px;
   line-height: 1.4;
@@ -465,9 +481,9 @@ fieldset {
       font-size: 22px; }
   @media only screen and (max-width: 500px) {
     .pupDetail {
-      width: 90%;
+      width: 80%;
       display: block;
-      padding: 20px; }
+      padding: 15px; }
       .pupDetail .pupInfo {
         width: 100%; }
       .pupDetail .pupHead {
@@ -484,9 +500,11 @@ fieldset {
 
 @media only screen and (max-width: 500px) {
   .flickity-prev-next-button {
-    background: #513531; }
+    background: rgba(81, 53, 49, 0.85); }
     .flickity-prev-next-button svg path.arrow {
-      fill: whitesmoke; } }
+      fill: rgba(245, 245, 245, 0.85); }
+    .flickity-prev-next-button:hover svg path.arrow {
+      fill: rgba(81, 53, 49, 0.85); } }
 
 footer > .wrapper {
   padding: 5px 0; }

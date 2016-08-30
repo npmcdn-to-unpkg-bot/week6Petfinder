@@ -7,7 +7,7 @@ main {
     	display: flex;
         position: relative;
         flex-direction: column-reverse;
-        padding: 50px 0;
+        padding: 0 0 50px 0;
 
 
     	#mapid {
@@ -204,6 +204,24 @@ main {
             width: 100%;
         };
 
+    }
+}
+
+.infoWindow > div {
+    .clientDog img {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .shelterInfo {
+        margin-top: 15px;
+        font-size: 15px;
+        text-align: center;
+        width: 100%;
+
+        p {
+            margin: 10px 0;
+        }
     }
 }
 

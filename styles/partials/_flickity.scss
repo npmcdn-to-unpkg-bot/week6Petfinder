@@ -63,8 +63,8 @@
 	overflow: hidden;
 	display: flex;
 	align-items: center;
-	padding: 15px;
-	background: whitesmoke;
+	padding: 10px;
+	background: rgba(whitesmoke, 0.85);
 
 	img {
 		max-height: 375px;
@@ -74,12 +74,16 @@
 	}
 
 	@include media-query(mobile) {
-		width: 90%;
+		width: 70%;
+
+		img {
+			max-height: 300px;
+		}
 	};
 }
 .pupDetail {
 	width: 50%;
-	background: whitesmoke;
+	background: rgba(whitesmoke, 0.85);
 	margin: 20px auto 0 auto;
 	padding: 15px 40px;
 	line-height: 1.4;
@@ -111,9 +115,9 @@
 	}
 
 	@include media-query(mobile) {
-		width: 90%;
+		width: 80%;
 		display: block;
-		padding: 20px;
+		padding: 15px;
 
 		.pupInfo {
 			width: 100%;
@@ -137,10 +141,14 @@
 
 .flickity-prev-next-button {
 	@include media-query(mobile) {
-		background: $rock;
+		background: rgba($rock, 0.85);
 
 		svg path.arrow {
-			fill: whitesmoke;
+			fill: rgba(whitesmoke,0.85);
+		}
+
+		&:hover svg path.arrow {
+			fill: rgba($rock, 0.85)
 		}
 	}
 }
