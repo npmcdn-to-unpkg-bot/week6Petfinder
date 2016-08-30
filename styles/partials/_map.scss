@@ -2,7 +2,7 @@
 main {
     background-color: whitesmoke;
     color: $rock;
-	
+
     .mapWrapper {
     	display: flex;
         position: relative;
@@ -12,22 +12,118 @@ main {
 
     	#mapid {
     		height: 50vh;
-            width: 1170px;
+            width: 100%;
             margin: 0 auto;
         }
     }
 }
 
 .secondForm {
+	width: 35%;
+	margin: 10px;
+    display: none;
+
+    .secondForm__title {
+        font-size: 30px;
+
+        @include media-query(mobile) {
+            font-size: 10vw;
+        };
+    }
+
+    input[type='checkbox'] {
+        opacity: 0;
+    }
+
+    p {
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    label > p {
+        font-size: 12px;
+    }
+}
+
+.checkBoxesWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .checkboxSizeAge {
+        width: 37%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include media-query(mobile) {
+            float: left;
+            width: 48%;
+            margin: 1px;
+        };
+
+        input[name="size"]:checked + label svg {
+            fill: #EF6550;
+        }
+
+        input[name="size"]:checked + label p {
+            color: #EF6550;
+        }
+
+        input[name="age"]:checked + label svg {
+            fill: #EF6550;
+        }
+
+        input[name="age"]:checked + label p {
+            color: #EF6550;
+        }
+    }
+
+    .checkboxGender {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include media-query(mobile) {
+            float: left;
+            width: 48%;
+            margin: 1px;
+        };
+
+
+        input[name="sex"]:checked + label svg {
+        fill: #EF6550;
+        }
+
+        input[name="sex"]:checked + label p {
+        color: #EF6550;
+        }
+    }
+
+    @include media-query(mobile) {
+        &.hide {
+            display: none;
+        }
+    };
+}
+
+.secondForm {
     width: 100%;
-    margin: 10px;
+    margin: 10px 0;
 
     form {
         width: 100%;
         display: flex;
-        align-items: top;
+        align-items: flex-start;
         justify-content: space-between;
         flex-wrap: wrap;
+
+        @include media-query(tablet) {
+            justify-content: center;
+        }
 
         @include media-query(mobile) {
             display: block;
@@ -43,18 +139,30 @@ main {
     fieldset {
         border: 0;
         width: 30%;
-        
-        @include media-query(mobile){
-            width: 100%;
+
+        @include media-query(tablet) {
+            width: 49%;
         }
-        
+
+        @include media-query(mobile) {
+            width: 100%;
+
+            > p {
+                width: 50%;
+                margin: 20px auto;
+                background: #e6e4e4;
+                padding: 20px;
+                cursor: pointer;
+            }
+        }
+
     }
     input[type="checkbox"] + label  {
 
         svg {
             fill: $rock;
             display: block;
-            margin: 0 auto;
+            margin: 15px auto;
         }
 
         p {
@@ -90,27 +198,15 @@ main {
         font-size: 12px;
         color: $rock;
 
+        @include media-query(mobile) {
+            background: #e6e4e4;
+            padding: 10px;
+            width: 100%;
+        };
+
     }
 }
-.checkBoxesWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
 
-    .checkboxSizeAge {
-        width: 37%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }  
-
-    .checkboxGender {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-    }      
+fieldset {
+    border: 0;
 }
-

@@ -32,14 +32,14 @@ petApp.displayShelter = function(shelters){
 		var myPopup = L.DomUtil.create('div', 'infoWindow');
 		myPopup.innerHTML = `
 			<div data-shelterID="${shelterLocation.id.$t}">
-			<div class="clientDog">
-			<img src="images/barkingDog.svg" alt="drawing of a barking dog" />
-			</div>
-			<div class="shelterInfo">
-			<h3>${shelterLocation.name["$t"]}</h3>
-			<p>${shelterLocation.city["$t"]}, ${shelterLocation.state["$t"]} ${shelterLocation.zip["$t"]}</p>
-			<p>${shelterLocation.email.$t}
-			</div>
+				<div class="clientDog">
+					<img src="images/barkingDog.svg" alt="drawing of a barking dog" />
+				</div>
+				<div class="shelterInfo">
+					<h3>${shelterLocation.name["$t"]}</h3>
+					<p>${shelterLocation.city["$t"]}, ${shelterLocation.state["$t"]} ${shelterLocation.zip["$t"]}</p>
+					<p>${shelterLocation.email.$t}
+				</div>
 			</div>
 		`;
 		var latLng = L.latLng(shelterLocation.latitude.$t, shelterLocation.longitude.$t);
@@ -51,15 +51,15 @@ petApp.displayShelter = function(shelters){
 		});
 
 		var marker = new L.shelterMarker(latLng, {
-			alt: shelterLocation.name.$t, 
+			alt: shelterLocation.name.$t,
 			title: shelterLocation.name.$t,
 			shelterID: shelterLocation.id.$t,
 			icon: markerIcon
 		})
-		console.log(marker)
 		marker.bindPopup(myPopup);
 		// console.log("mypopup", marker);
 		myPopup.addEventListener("click",  function() {
+			// $('.containerFlickity').empty().removeClass('hide');
 			$('.flickity-container').empty().removeClass("hide");
 			$('.closeFlickity').removeClass("hide");
 			var popupDivID = $(this).children()[0].dataset.shelterid;
@@ -67,23 +67,47 @@ petApp.displayShelter = function(shelters){
 				if ($.isEmptyObject(shelter.finalpet3)){
 					shelter.pet.forEach(function(pup){
 						if(pup.shelterId.$t === popupDivID) {
-							$(".flickity-container").append(`
-								<div class="carouselElem">
-									<div class="pupHead">
-										<h3 class="carousel-subtitle">${shelter.city.$t}</h3>
-										<h3 class="carousel-title">${shelter.name.$t}</h3>
+							if(pup.media.photos){
+								$(".flickity-container").append(`
+									<div class="carouselElem">
+										<div class="pupPic">
+											<img src="${pup.media.photos.photo[2].$t}" alt="picture of ${pup.name.$t}" />
+										</div>
+										<div class="pupDetail">
+											<div class="pupInfo">
+												<h3 class="carousel-title">${pup.name.$t}</h3>
+												<p>Age: ${pup.age.$t}</p>
+												<p>Size: ${pup.size.$t}</p>
+												<p>Gender: ${pup.sex.$t}</p>
+											</div>
+											<div class="pupHead">
+												<h3 class="carousel-title">${shelter.name.$t}</h3>
+												<h3 class="carousel-subtitle">${shelter.city.$t}</h3>
+											</div>
+										</div>
 									</div>
-									<div class="pupPic">
-										<img src="${pup.media.photos.photo[2].$t}" alt="picture of ${pup.name.$t}" />
+								`)
+							} else {
+								$(".flickity-container").append(`
+									<div class="carouselElem">
+										<div class="pupPic">
+											<img src="images/nophoto.png" alt="no phto available" />
+										</div>
+										<div class="pupDetail">
+											<div class="pupInfo">
+												<h3 class="carousel-title">${pup.name.$t}</h3>
+												<p>Age: ${pup.age.$t}</p>
+												<p>Size: ${pup.size.$t}</p>
+												<p>Gender: ${pup.sex.$t}</p>
+											</div>
+											<div class="pupHead">
+												<h3 class="carousel-title">${shelter.name.$t}</h3>
+												<h3 class="carousel-subtitle">${shelter.city.$t}</h3>
+											</div>
+										</div>
 									</div>
-									<div class="pupInfo">
-										<h3 class="carousel-title">${pup.name.$t}</h3>
-										<p>Age: ${pup.age.$t}</p>
-										<p>Size: ${pup.size.$t}</p>
-										<p>Gender: ${pup.sex.$t}</p>
-									</div>
-								</div>
-							`)
+								`)
+							}
 						}
 					}) //.forEach()
 				} else {
@@ -118,7 +142,7 @@ petApp.displayShelter = function(shelters){
 			$(".flickity-container").flickity({ "imagesLoaded": true, "pageDots": false });
 		});//.addEventListener
 // ------------------ bind a pop to each marker, put content in popup box
-		
+
 // ------------------ push all created markers into the empty array created before
 		markers.push(marker);
 	}); // /.shelter.forEach()

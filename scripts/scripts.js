@@ -71,8 +71,13 @@ petApp.init = function () {
 					$("main").removeClass("hide");
 					$("footer").removeClass("hide");
 					setTimeout(function(){
-						$('html, body').animate({scrollTop:750}, 1000);
-					}, 2200);
+						$('html, body').animate({scrollTop:750}, 700);
+					}, 1000);
+					if (document.documentElement.clientWidth <= 500) {
+						setTimeout(function(){
+							$('html, body').animate({scrollTop:680}, 650);
+						}, 1000);
+					}
 				} // if
 // ------------------ calling function to display shelter, pass query to only display shelter that have pets.
 // --------------  In map.js, we grab those shelter's longtitude and latitude and assign them to makers	--------------
@@ -102,13 +107,6 @@ petApp.init = function () {
 			return $(input).val();
 		}).toArray();
 		checkedValuesSexDefault = ["F", "M"];
-
-		// var checkedInputsChar = $('input[name=char]:checked');
-		// var checkedValuesChar = checkedInputsChar.map(function(index, input) {
-		// 	return $(input).val();
-		// }).toArray();
-		// checkedValuesCharDefault = ["housetrained", "noClaws", "specialNeeds"];
-
 
 		petApp.mymap.removeLayer(petApp.markerGroup);
 
