@@ -208,9 +208,29 @@ main {
 }
 
 .infoWindow > div {
-    .clientDog img {
+    .clientDog {
         margin: 0 auto;
         display: block;
+        width: 50px;
+
+        > svg {
+            position: static;
+
+            #head {
+                /*-webkit-animation-duration: 3s;*/
+                -webkit-animation-delay: 1s;
+                -webkit-animation-iteration-count: 2;
+            }
+
+            #bark {
+                -webkit-animation-delay: 3s;
+                -webkit-animation-iteration-count: 2;
+            }
+
+            > path {
+                fill: $rock;
+            }
+        }
     }
 
     .shelterInfo {

@@ -376,9 +376,21 @@ main {
         padding: 10px;
         width: 100%; } }
 
-.infoWindow > div .clientDog img {
+.infoWindow > div .clientDog {
   margin: 0 auto;
-  display: block; }
+  display: block;
+  width: 50px; }
+  .infoWindow > div .clientDog > svg {
+    position: static; }
+    .infoWindow > div .clientDog > svg #head {
+      /*-webkit-animation-duration: 3s;*/
+      -webkit-animation-delay: 1s;
+      -webkit-animation-iteration-count: 2; }
+    .infoWindow > div .clientDog > svg #bark {
+      -webkit-animation-delay: 3s;
+      -webkit-animation-iteration-count: 2; }
+    .infoWindow > div .clientDog > svg > path {
+      fill: #513531; }
 
 .infoWindow > div .shelterInfo {
   margin-top: 15px;
