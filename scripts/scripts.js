@@ -1,10 +1,10 @@
-// -------------- creating empty object and properties to use in Ajax  call -------------- 
+// -------------- creating empty object and properties to use in Ajax  call --------------
 var petApp = {};
 	petApp.apiKey = '6e0b64b1d094adcd97940c98d9e86423';
 	petApp.apiUrlPup = 'http://api.petfinder.com/pet.find';
-	petApp.apiUrlShelter = 'http://api.petfinder.com/shelter.find'
+	petApp.apiUrlShelter = 'http://api.petfinder.com/shelter.find';
 
-// --------------- making ajax call for pet data -------------- 
+// --------------- making ajax call for pet data --------------
 petApp.getPet = function (query) {
 	return $.ajax({
 			url: petApp.apiUrlPup,
@@ -19,7 +19,7 @@ petApp.getPet = function (query) {
 			} // /data
 	});// /$.ajax
 };// /.getPet
-// ---------------- making ajax call for shelter data -------------- 
+// ---------------- making ajax call for shelter data --------------
 petApp.getShelter = function (query) {
 	return $.ajax({
 			url: petApp.apiUrlShelter,
@@ -33,64 +33,69 @@ petApp.getShelter = function (query) {
 			} // /data
 	});// /$.ajax
 };// /.getShelter
-// ------------------ initiating App -------------- 
+// ------------------ initiating App --------------
 petApp.init = function () {
-// ------------------ when form is submitted-------------- 
+// ------------------ when form is submitted--------------
 	$('.searchForm').on('submit', function(e) {
-// ------------------ prevent default form page refreshing action-------------- 
-	    e.preventDefault(); 
+// ------------------ prevent default form page refreshing action--------------
+	    e.preventDefault();
 	    $('.svgWrapper').fadeIn();
-// ------------------ grab the user's locaiton input value-------------- 
+// ------------------ grab the user's locaiton input value--------------
 	    petApp.locationInput = $('input[name=location]').val();
-// ------------------ clearing the input field when user has entered a location-------------- 
+// ------------------ clearing the input field when user has entered a location--------------
 	    $('input[name=location]').val('');
-// ------------------ pass on the location as the API's location search query-------------- 
-		$.when(petApp.getPet(petApp.locationInput), petApp.getShelter( petApp.locationInput)) 
-// ------------------ when the app's data is returned to us -------------- 
+// ------------------ pass on the location as the API's location search query--------------
+		$.when(petApp.getPet(petApp.locationInput), petApp.getShelter( petApp.locationInput))
+// ------------------ when the app's data is returned to us --------------
 			.done(function(gotPet, gotShelter){
-// ------------------ grab the pet array from pet data and store it in a new variable-------------- 
+// ------------------ grab the pet array from pet data and store it in a new variable--------------
 				var pets = gotPet[0].petfinder.pets.pet;
-// ------------------ grab the shelter array from shelter data and store it in a new variable-------------- 
+// ------------------ grab the shelter array from shelter data and store it in a new variable--------------
 				var shelters = gotShelter[0].petfinder.shelters.shelter;
-// ------------------ looping through shelter array-------------- 
+// ------------------ looping through shelter array--------------
 				//put this into it's own function - RANJAN
 				shelters.forEach(function(shelterObj) {
-// ------------------ inside the loop, look for a match between shelters and pets-------------- 
-// ------------------ store the result in a shelter as the key to a new pet property-------------- 
+// ------------------ inside the loop, look for a match between shelters and pets--------------
+// ------------------ store the result in a shelter as the key to a new pet property--------------
 					shelterObj.pet = pets.filter(function(petObj) {
-						return petObj.shelterId.$t === shelterObj.id.$t
+						return petObj.shelterId.$t === shelterObj.id.$t;
 					});// /.filter
 // ------------------ creating a new property inside petApp, return all the shelters that have pets
-				});// forEach-------------- 
+				});// forEach--------------
 				petApp.shelterWithPets = shelters.filter(function(shelterObj){
-					return shelterObj.pet.length > 0
+					return shelterObj.pet.length > 0;
 				});// /.filter
-// ------------------ if no map, start map. this statement hides map when page first loads-------------- 
+// ------------------ if no map, start map. this statement hides map when page first loads--------------
 				if (petApp.mymap === undefined) {
 					petApp.initMap();
 					$("main").removeClass("hide");
 					$("footer").removeClass("hide");
 					setTimeout(function(){
-						$('html, body').animate({scrollTop:750}, 1000);	
-					}, 2200)
+						$('html, body').animate({scrollTop:750}, 700);
+					}, 1000);
+					if (document.documentElement.clientWidth <= 500) {
+						setTimeout(function(){
+							$('html, body').animate({scrollTop:680}, 650);
+						}, 1000);
+					}
 				} // if
-// ------------------ calling function to display shelter, pass query to only display shelter that have pets. 
-// --------------  In map.js, we grab those shelter's longtitude and latitude and assign them to makers	-------------- 	
+// ------------------ calling function to display shelter, pass query to only display shelter that have pets.
+// --------------  In map.js, we grab those shelter's longtitude and latitude and assign them to makers	--------------
 				petApp.displayShelter(petApp.shelterWithPets);
 			}) //.done
 			.fail(function(err1, err2) {
-				alert('No Puppies for you :/')
+				alert('No Puppies for you :/');
 			}); //.fail
 	}); // form on submit
-// ------------------ defining eventlistener, when the status of checkboxes change-------------- 
+// ------------------ defining eventlistener, when the status of checkboxes change--------------
 	$('input[type=checkbox]').on('change', function (e) {
-		// e.preventDefault(); 
+		// e.preventDefault();
 		var checkedInputsAge = $('input[name=age]:checked');
 		var checkedValuesAge = checkedInputsAge.map(function(index, input) {
 			return $(input).val();
 		}).toArray();
 		checkedValuesAgeDefault = ["Baby", "Young", "Adult", "Senior"];
-			
+
 		var checkedInputsSize = $('input[name=size]:checked');
 		var checkedValuesSize = checkedInputsSize.map(function(index, input) {
 			return $(input).val();
@@ -103,20 +108,13 @@ petApp.init = function () {
 		}).toArray();
 		checkedValuesSexDefault = ["F", "M"];
 
-		// var checkedInputsChar = $('input[name=char]:checked');
-		// var checkedValuesChar = checkedInputsChar.map(function(index, input) {
-		// 	return $(input).val();
-		// }).toArray();
-		// checkedValuesCharDefault = ["housetrained", "noClaws", "specialNeeds"];
-
-
 		petApp.mymap.removeLayer(petApp.markerGroup);
 
 		var filteringPets = function (shelterDataset, checkedValues, checkedDefault, filterCategory, petName, petName2) {
-			
+
 			petApp.newShelter = shelterDataset.map(function(shelter){
 				if (checkedValues.length !== 0) {
-					var filteredPets = checkedValues.map(function(criteria){ 
+					var filteredPets = checkedValues.map(function(criteria){
 						return shelter[petName].filter(function(pet){
 							if (filterCategory === 'age') {
 								return pet.age.$t === criteria;
@@ -128,7 +126,7 @@ petApp.init = function () {
 						}); // /.filter
 					});// /.map
 				} else {
-					var filteredPets = checkedDefault.map(function(criteria){ 
+					var filteredPets = checkedDefault.map(function(criteria){
 					return shelter[petName].filter(function(pet){
 						if (filterCategory === 'age') {
 							return pet.age.$t === criteria;
@@ -139,15 +137,15 @@ petApp.init = function () {
 						}
 					});
 				});
-				}	
+				}
 				shelter[petName2] = flattenedPets = $.map(filteredPets, function(n){
 					return n;
 				});// /$.map, a flatten method
 				return shelter;
 			}).filter(function(shelter){
 				return shelter[petName2].length > 0;
-			});	// /.filter	
-		};	
+			});	// /.filter
+		};
 
 		filteringPets(petApp.shelterWithPets, checkedValuesAge, checkedValuesAgeDefault, 'age', 'pet', 'finalpet');
 		filteringPets(petApp.newShelter, checkedValuesSize, checkedValuesSizeDefault, 'size', 'finalpet', 'finalpet2');
@@ -174,7 +172,7 @@ petApp.init = function () {
 	}); // /.$('input[type=checkbox]').on('change',....)
 
 }; // /.petApp.init()
-// ------------------ when document is ready, aka when page is loaded, start running petApp.-------------- 
+// ------------------ when document is ready, aka when page is loaded, start running petApp.--------------
 $(function() {
 	petApp.init();
 

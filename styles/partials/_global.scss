@@ -1,4 +1,9 @@
 // ----- large containers -----//
+
+body {
+	overflow-x: hidden;
+	background: whitesmoke;
+}
 section, header, footer, main {
 	width: 100%;
 }
@@ -11,12 +16,12 @@ section, header, footer, main {
 
 // ----- typography ----- //
 h1, h2 {
-	font-family: $headingFont; 
+	font-family: $headingFont;
 }
 
 h3, p, label, a, input {
 	font-family: $bodyFont;
-	color: #000;
+	color: #513531;
 	margin: 0;
 }
 
